@@ -1,0 +1,24 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: mongo_db
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  api-node-mongo:
+    build: .
+    container_name: api_node_mongo
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - MONGO_URI=mongodb://mongo:27017/productos_db
+    depends_on:
+      - mongo
+
+volumes:
+  mongo_data:
