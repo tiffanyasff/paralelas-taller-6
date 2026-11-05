@@ -43,9 +43,20 @@ mkdir -p ~/.docker/cli-plugins
 curl -SL https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
 chmod +x ~/.docker/cli-plugins/docker-compose
 
+# El paquete "docker" de Amazon Linux trae un buildx viejo/incompleto; "docker compose build"
+# exige una versión reciente, así que también se instala el plugin manualmente.
+# (se obtiene la versión siguiendo el redirect de "latest" en vez de la API, que puede dar rate limit)
+BUILDX_VERSION=$(curl -s -o /dev/null -w '%{redirect_url}' https://github.com/docker/buildx/releases/latest | sed 's#.*/##')
+echo "Version detectada: $BUILDX_VERSION"
+curl -SL "https://github.com/docker/buildx/releases/download/${BUILDX_VERSION}/buildx-${BUILDX_VERSION}.linux-amd64" -o ~/.docker/cli-plugins/docker-buildx
+chmod +x ~/.docker/cli-plugins/docker-buildx
+
 docker --version
 docker compose version
+docker buildx version
 ```
+
+> Si al correr `docker compose up -d --build` aparece el error `compose build requires buildx 0.17.0 or later`, es justamente porque falta este paso.
 
 ### Ubuntu 22.04 (apt) — alternativa si se usó esta AMI
 

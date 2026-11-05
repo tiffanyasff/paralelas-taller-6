@@ -14,6 +14,6 @@ Se desarrollaron dos APIs REST con operaciones CRUD completas (crear, leer, actu
 
 ## Enlaces
 
-- **Repositorio API 1 (Node + MongoDB):** [URL_DEL_REPOSITORIO_NODE_MONGO]
-- **Repositorio API 2 (Python + PostgreSQL):** [URL_DEL_REPOSITORIO_PYTHON_POSTGRES]
+- **Repositorio API 1 (Node + MongoDB):** https://github.com/tiffanyasff/paralelas-taller-6
+- **Repositorio API 2 (Python + PostgreSQL):** https://github.com/tiffanyasff/paralelas-taller-6-api2
 - **Video en YouTube:** [URL_DEL_VIDEO]
